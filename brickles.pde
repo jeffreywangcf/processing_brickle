@@ -5,7 +5,7 @@ int MOVEMENT = 20;
 
 int BALL_X = 540;
 int BALL_Y = 670;
-int BALL_RAD = 25;
+int BALL_RAD = 15;
 
 int LAST_X = -1;
 int LAST_Y = -1;
@@ -15,6 +15,9 @@ int BASE_Y = 688;
 int BASE_LEN = 100;
 int BASE_HEIGHT = 20;
 
+int brickLen = 108;
+int brickHeight = 40;
+
 class Bricks
 {
   private int m_X;
@@ -22,19 +25,23 @@ class Bricks
   private int m_Len;
   private int m_Height;
   private float[] m_colors;
+  private boolean m_status;
   public Bricks(int x, int y, int len, int h)
   {
     this.m_X = x;
     this.m_Y = y;
     this.m_Len = len;
     this.m_Height = h;
+    this.m_status = true;
     this.m_colors = new float[2];
-    for(int i = 0; i < m_colors.length; i++)
-      m_colors[i] = random(64, 256);
+    m_colors[0] = random(128, 256);
+    m_colors[1] = m_colors[0] + random(16, 64);
   }
 }
 
 Bricks[][] brickles = new Bricks[3][10];
+int totalActivatedBricks = 0;
+
 
 void setup()
 {
@@ -51,12 +58,12 @@ void setup()
     int xVal = 0;
     for(int j = 0; j < brickles[i].length; j++)
     {
-      brickles[i][j] = new Bricks(xVal, yVal, 108, 40);
+      brickles[i][j] = new Bricks(xVal, yVal, brickLen, brickHeight);
       fill(brickles[i][j].m_colors[0], brickles[i][j].m_colors[1], 255);
       rect(brickles[i][j].m_X, brickles[i][j].m_Y, brickles[i][j].m_Len, brickles[i][j].m_Height);
-      xVal += 108;
+      xVal += brickLen;
     }
-    yVal += 40;
+    yVal += brickHeight;
   }
 }
 void gameOver()
@@ -189,8 +196,20 @@ void keyPressed()
     }
   }
 }
+void erase(int brick_X, int brick_Y)
+{
+  fill(#111732);
+  rect(brickles[brick_X][brick_Y].m_X, brickles[brick_X][brick_Y].m_Y, 
+        brickles[brick_X][brick_Y].m_Len, brickles[brick_X][brick_Y].m_Height);
+  bounce(brickles[brick_X][brick_Y].m_X, brickles[brick_X][brick_Y].m_Y, 
+        brickles[brick_X][brick_Y].m_Len, brickles[brick_X][brick_Y].m_Height);
+  brickles[brick_X][brick_Y].m_status = false;
+}
 void draw()
 {
   touch();
   move();
+  if(BALL_Y - BALL_RAD/2 < brickHeight * 3)
+    if(brickles[int((BALL_Y - BALL_RAD/2)/brickHeight)][int(BALL_X/brickLen)].m_status)
+      erase(int((BALL_Y - BALL_RAD/2)/brickHeight), int(BALL_X/brickLen));
 }

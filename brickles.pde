@@ -15,6 +15,27 @@ int BASE_Y = 688;
 int BASE_LEN = 100;
 int BASE_HEIGHT = 20;
 
+class Bricks
+{
+  private int m_X;
+  private int m_Y;
+  private int m_Len;
+  private int m_Height;
+  private float[] m_colors;
+  public Bricks(int x, int y, int len, int h)
+  {
+    this.m_X = x;
+    this.m_Y = y;
+    this.m_Len = len;
+    this.m_Height = h;
+    this.m_colors = new float[2];
+    for(int i = 0; i < m_colors.length; i++)
+      m_colors[i] = random(64, 256);
+  }
+}
+
+Bricks[][] brickles = new Bricks[3][10];
+
 void setup()
 {
   size(1080, 720);
@@ -24,6 +45,19 @@ void setup()
   ellipse(BALL_X, BALL_Y, BALL_RAD, BALL_RAD);
   fill(#F6F5FF);
   rect(BASE_X, BASE_Y, BASE_LEN, BASE_HEIGHT);
+  int yVal = 0;
+  for(int i = 0; i < brickles.length; i++)
+  {
+    int xVal = 0;
+    for(int j = 0; j < brickles[i].length; j++)
+    {
+      brickles[i][j] = new Bricks(xVal, yVal, 108, 40);
+      fill(brickles[i][j].m_colors[0], brickles[i][j].m_colors[1], 255);
+      rect(brickles[i][j].m_X, brickles[i][j].m_Y, brickles[i][j].m_Len, brickles[i][j].m_Height);
+      xVal += 108;
+    }
+    yVal += 40;
+  }
 }
 void gameOver()
 {

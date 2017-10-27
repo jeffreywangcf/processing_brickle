@@ -108,7 +108,7 @@ boolean bounce(int shapeX, int shapeY, int shapeLen, int shapeHeight)
 void move()
 {
   fill(#111732);
-  //ellipse(BALL_X, BALL_Y, BALL_RAD, BALL_RAD);
+  ellipse(BALL_X, BALL_Y, BALL_RAD, BALL_RAD);
   switch(DIRECTION)
   {
     case 135:

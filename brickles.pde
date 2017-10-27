@@ -1,7 +1,7 @@
 int DIRECTION = 135;
 
-int STEP = 5;
-int MOVEMENT = 20;
+int STEP = 4;
+int MOVEMENT = 25;
 
 int BALL_X = 540;
 int BALL_Y = 670;
@@ -10,9 +10,9 @@ int BALL_RAD = 15;
 int LAST_X = -1;
 int LAST_Y = -1;
 
-int BASE_X = 465;
+int BASE_X = 445;
 int BASE_Y = 688;
-int BASE_LEN = 100;
+int BASE_LEN = 140;
 int BASE_HEIGHT = 20;
 
 int brickLen = 108;
@@ -39,7 +39,7 @@ class Bricks
   }
 }
 
-Bricks[][] brickles = new Bricks[3][10];
+Bricks[][] brickles = new Bricks[5][10];
 int totalActivatedBricks = 0;
 
 
@@ -209,7 +209,7 @@ void draw()
 {
   touch();
   move();
-  if(BALL_Y - BALL_RAD/2 < brickHeight * 3)
+  if(BALL_Y - BALL_RAD/2 < brickHeight * 5)
     if(brickles[int((BALL_Y - BALL_RAD/2)/brickHeight)][int(BALL_X/brickLen)].m_status)
       erase(int((BALL_Y - BALL_RAD/2)/brickHeight), int(BALL_X/brickLen));
 }

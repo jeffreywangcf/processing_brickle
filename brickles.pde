@@ -18,6 +18,8 @@ int BASE_HEIGHT = 20;
 int brickLen = 108;
 int brickHeight = 40;
 
+int score = 0;
+
 class Bricks
 {
   private int m_X;
@@ -68,7 +70,9 @@ void setup()
 }
 void gameOver()
 {
-  delay(1000000);
+  textSize(100);
+  text("GAME OVER",240,360);
+  delay(10);
 }
 void touch()
 {

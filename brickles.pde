@@ -10,15 +10,13 @@ int BALL_RAD = 15;
 int LAST_X = -1;
 int LAST_Y = -1;
 
-int BASE_X = 445;
+int BASE_X = 0;
 int BASE_Y = 688;
-int BASE_LEN = 140;
+int BASE_LEN = 1080;
 int BASE_HEIGHT = 20;
 
 int brickLen = 108;
 int brickHeight = 40;
-
-int score = 0;
 
 class Bricks
 {
@@ -41,7 +39,7 @@ class Bricks
   }
 }
 
-Bricks[][] brickles = new Bricks[5][10];
+Bricks[][] brickles = new Bricks[8][10];
 int totalActivatedBricks = 0;
 
 
@@ -70,9 +68,7 @@ void setup()
 }
 void gameOver()
 {
-  textSize(100);
-  text("GAME OVER",240,360);
-  delay(10);
+  delay(1000000);
 }
 void touch()
 {
@@ -213,7 +209,7 @@ void draw()
 {
   touch();
   move();
-  if(BALL_Y - BALL_RAD/2 < brickHeight * 5)
+  if(BALL_Y - BALL_RAD/2 < brickHeight * 8)
     if(brickles[int((BALL_Y - BALL_RAD/2)/brickHeight)][int(BALL_X/brickLen)].m_status)
       erase(int((BALL_Y - BALL_RAD/2)/brickHeight), int(BALL_X/brickLen));
 }

@@ -111,37 +111,37 @@ boolean bounce(int shapeX, int shapeY, int shapeLen, int shapeHeight)
 {
   boolean c1 = ((BALL_X + BALL_RAD/2) >= shapeX && (BALL_X - BALL_RAD/2) <= (shapeX + shapeLen));
   boolean c2 = ((BALL_Y + BALL_RAD/2) >= shapeY && (BALL_Y - BALL_RAD/2) <= (shapeY + shapeHeight));
-  if(c1 && c2)
+  if(c1 && c2)  //c1 and c2 are two conditions that determine if the ball is at the boundry of the shape.
   {
     //print("bounce\n");
     //print(DIRECTION, LAST_X, LAST_Y, BALL_X, BALL_Y);
     //print("\n");
-    if((BALL_Y - BALL_RAD/2) <= (shapeY + shapeHeight / 2))
-      if(LAST_X > BALL_X)
+    if((BALL_Y - BALL_RAD/2) <= (shapeY + shapeHeight / 2))  //if the ball touched from the right
+      if(LAST_X > BALL_X)   //if delta x is negative
         DIRECTION -= 90;
-      else
+      else                  //if deata x is negative
         DIRECTION += 90;
-    else if((BALL_Y - BALL_RAD/2) > (shapeY + shapeHeight / 2))
+    else if((BALL_Y - BALL_RAD/2) > (shapeY + shapeHeight / 2))   //if the ball touched from the bottom
       if(LAST_X > BALL_X)
         DIRECTION += 90;
       else
         DIRECTION -= 90;
-    else if((BALL_X + BALL_RAD/2) <= (shapeX + shapeLen / 2))
+    else if((BALL_X + BALL_RAD/2) <= (shapeX + shapeLen / 2))    //if the ball touched from the left
       if(LAST_Y > BALL_Y)
         DIRECTION += 90;
       else
         DIRECTION -= 90;
-    else
+    else                                                        //if the ball touched from the top
       if(LAST_Y > BALL_Y)
         DIRECTION -= 90;
       else
         DIRECTION += 90;
-    if(DIRECTION < 0)
+    if(DIRECTION < 0)         //reset DIRECTION value if it's out of range
       DIRECTION = 315;
-    if(DIRECTION > 360)
+    else if(DIRECTION > 360)       //reset DIRECTION value if it's out of range
       DIRECTION = 45;
-    LAST_X = BALL_X;
-    LAST_Y = BALL_Y;
+    LAST_X = BALL_X;        //reset the Last_X value to current x value
+    LAST_Y = BALL_Y;        //reset the Last_Y value to current y value
     return true;
   }
   return false;

@@ -1,4 +1,4 @@
 # processing_brickle
-Jeffrey &amp; Berk
+created by: Jeffrey & Berk
 
 AP Computer Science Principle collaborative project (fall term)
